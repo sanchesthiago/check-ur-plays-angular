@@ -1,0 +1,24 @@
+<div class="card" style="width: 18rem">
+  <img src="{{ corverLink }}" class="card-img-top" alt="..." />
+  <div class="card-body organize_btn">
+    <button
+      type="button"
+      class="btn btn-success btn_size"
+      (click)="getClickCard('add')"
+    >
+      <div class="icon_button">
+        <i class="bi bi-check-circle"></i> Adicionar
+      </div>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-primary btn_size"
+      (click)="getClickCard('info')"
+    >
+      <div class="icon_button">
+        <i class="bi bi-info-circle"></i> Informações
+      </div>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <div class="row bg-gradient bg-black p-2">
+    <div class="col-3">
+      <img
+        src="../../../assets/dragao.jpg"
+        class="img-fluid rounded whidth-img"
+        alt="..."
+      />
+    </div>
+    <div class="col">
+      <p class="h6">
+        House of the Dragon (no Brasil: A Casa do Dragão) é uma série de
+        televisão de drama e fantasia medieval norte-americana criada por Ryan
+        J. Condal e George R. R. Martin para o canal HBO. O desenvolvimento da
+        série foi realizado por Condal e pelo diretor Miguel Sapochnik,[2] com
+        base em eventos narrados na segunda metade do romance Fire & Blood
+        (2018), escrito por Martin. A série é uma prequela de Game of Thrones
+        (2011–2019) e tem como enredo a disputa dos meios-irmãos Rhaenyra
+        Targaryen e Aegon II pela posse do Trono de Ferro dos Sete Reinos de
+        Westeros.[3] House of the Dragon estreou em 21 de agosto de 2022[4][5] e
+        logo se tornou a maior estreia de uma série na história do canal HBO em
+        solo americano, atraindo quase 10 milhões de telespectadores em todas as
+        suas plataformas.[6] Além disso, a série também recebeu inúmeras
+        críticas positivas de especialistas do entretenimento, sendo considerada
+        por alguns melhor ou similar a série título da franquia
+      </p>
+    </div>
+  </div>
+  <p class="h4 p-2">Temporadas</p>
+  @for (item of seasonInfos; track $index) {
+  <app-seasons-shower
+    [season]="item.season"
+    [link]="item.link"
+    [episodes]="item.episodes"
+  ></app-seasons-shower>
+  }
+</div>

@@ -1,0 +1,13 @@
+@if (addMoviesService.addMovies$() ) {
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Série Adicionada</strong> com sucesso
+  <button
+    (click)="toggleAlert()"
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+
+}
