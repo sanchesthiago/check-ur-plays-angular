@@ -1,0 +1,17 @@
+<div class="container px-0">
+  <h3 class="main-title">Elenco</h3>
+  <drag-scroll #nav [scroll-x-wheel-enabled]="true" [scrollbar-hidden]="true">
+    @for (p of jsonData; track $index) {
+    <div drag-scroll-item>
+      <div class="text-center bg-gradient bg-black p-2">
+        <img [src]="p.image" class="card-img-top img" alt="..." />
+        <div class="text-center">
+          <h6 class="text-white">{{ p.title }}</h6>
+          <p class="fs-6 text-white">{{ p.type }}</p>
+        </div>
+      </div>
+    </div>
+
+    }
+  </drag-scroll>
+</div>
