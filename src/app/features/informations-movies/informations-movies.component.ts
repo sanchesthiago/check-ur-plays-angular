@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionsMoviesComponent } from './components/actions-movies/actions-movies.component';
-import { CastMoviesComponent } from './components/cast-movies/cast-movies.component';
+import { CastMoviesComponent } from '../../shared/cast-movies/cast-movies.component';
 import { DescriptionMoviesComponent } from './components/description-movies/description-movies.component';
 
 @Component({
