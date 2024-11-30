@@ -1,0 +1,13 @@
+.color-progress {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 142, 12, 1) 0%,
+    rgba(16, 191, 20, 1) 45%,
+    rgba(19, 205, 59, 1) 100%
+  );
+}
+
+.display {
+  display: flex;
+  align-items: center;
+}

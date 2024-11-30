@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seasons-shower',
@@ -8,7 +9,12 @@ import { Component, Input } from '@angular/core';
   styleUrl: './seasons-shower.component.scss',
 })
 export class SeasonsShowerComponent {
+  private router: Router = inject(Router);
   @Input() season!: number;
   @Input() episodes!: number;
   @Input() link!: string;
+
+  sendToEpisodes() {
+    this.router.navigate(['destalhes-temporadas']);
+  }
 }
