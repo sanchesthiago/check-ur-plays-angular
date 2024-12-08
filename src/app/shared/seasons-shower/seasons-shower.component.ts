@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 })
 export class SeasonsShowerComponent {
   private router: Router = inject(Router);
-  @Input() season!: number;
+  @Input() season!: string;
   @Input() episodes!: number;
-  @Input() link!: string;
+  @Input() link!: string | null;
 
   sendToEpisodes() {
     this.router.navigate(['destalhes-temporadas']);

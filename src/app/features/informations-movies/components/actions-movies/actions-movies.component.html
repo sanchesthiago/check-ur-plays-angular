@@ -1,8 +1,9 @@
+@if (infos.infosTvShow$(); as infosTvShow) {
 <div class="container text-center mt-4">
   <div class="row">
     <div class="col">
       <img
-        src="../../../assets/dragao_cover.jpg"
+        src="{{ infosTvShow.backdrop_path }}"
         class="img-fluid rounded"
         alt="..."
       />
@@ -35,3 +36,4 @@
     </div>
   </div>
 </div>
+}

@@ -39,7 +39,7 @@ export const episodesSeason: Array<IEpisodesSeasons> = [
     description:
       'Rhaenyra interrompe sua viagem por Westeros e Daemon lhe apresenta a princesa da Rua da Seda.',
     image: '../../../assets/prototipo_serie4.jpg',
-    watched: false,
+    watched: true,
   },
   {
     season: 1,
@@ -79,7 +79,7 @@ export const episodesSeason: Array<IEpisodesSeasons> = [
     description:
       'Viserys organiza um torneio para comemorar o nascimento de seu segundo filho; Rhaenyra recebe seu tio Daemon na Fortaleza Vermelha.',
     image: '../../../assets/prototipo_serie8.jpg',
-    watched: false,
+    watched: true,
   },
   {
     season: 1,
@@ -89,7 +89,7 @@ export const episodesSeason: Array<IEpisodesSeasons> = [
     description:
       'As tensões começam a aumentar na corte real à medida que a nova coroação se aproxima; Alicent convoca Cole e Aemond para rastrear Aegon; Otto reúne as grandes casas de Westeros para afirmar sua lealdade.',
     image: '../../../assets/prototipo_serie9.jpg',
-    watched: false,
+    watched: true,
   },
   {
     season: 1,

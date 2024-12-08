@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SeasonsShowerComponent } from '../../../../shared/seasons-shower/seasons-shower.component';
-import { ISeasonInfos } from '../../../../shared/models/IseasonInfos';
+import { GetInfosTvShowService } from '../../service/get-infos-tv-show.service';
 
 @Component({
   selector: 'app-description-movies',
@@ -9,13 +9,6 @@ import { ISeasonInfos } from '../../../../shared/models/IseasonInfos';
   templateUrl: './description-movies.component.html',
   styleUrl: './description-movies.component.scss',
 })
-export class DescriptionMoviesComponent implements OnInit {
-  public seasonInfos: Array<ISeasonInfos> = [];
-  ngOnInit(): void {
-    this.seasonInfos = [
-      { link: '../../../assets/dragao_cover.jpg', season: 1, episodes: 10 },
-      { link: '../../../assets/dragao_cover.jpg', season: 2, episodes: 13 },
-      { link: '../../../assets/dragao_cover.jpg', season: 3, episodes: 12 },
-    ];
-  }
+export class DescriptionMoviesComponent {
+  public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
 }
