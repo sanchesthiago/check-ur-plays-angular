@@ -3,10 +3,15 @@ import { TopButtonsComponent } from './features/top-buttons/top-buttons.componen
 import { InformationsMoviesComponent } from './features/informations-movies/informations-movies.component';
 import { EpisodesSeriesComponent } from './features/episodes-series/episodes-series.component';
 import { InformationMoviesResolver } from './features/informations-movies/resolver/information-movies.resolver'; // Atualizado
+import { homeResolver } from './features/top-buttons/resolver/home.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: TopButtonsComponent },
+  {
+    path: 'home',
+    component: TopButtonsComponent,
+    resolve: { compInfos: homeResolver },
+  },
   {
     path: 'informacao',
     component: InformationsMoviesComponent,

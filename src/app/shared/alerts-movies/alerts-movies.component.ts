@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { AddMoviesService } from '../service/add-movies.service';
+import { HandleTvShowsSelected } from '../service/handle-tv-shows-selected.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -10,10 +10,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './alerts-movies.component.scss',
 })
 export class AlertsMoviesComponent {
-  public addMoviesService: AddMoviesService = inject(AddMoviesService);
+  public addMoviesService: HandleTvShowsSelected = inject(
+    HandleTvShowsSelected
+  );
   @Input() enable: boolean = false;
 
-  toggleAlert() {
-    this.addMoviesService.addMovies.set(false);
-  }
+  // toggleAlert() {
+  //   this.addMoviesService.selectedTvShow.set(false);
+  // }
 }

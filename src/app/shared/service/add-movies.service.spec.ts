@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AddMoviesService } from './add-movies.service';
+import { HandleTvShowsSelected } from './handle-tv-shows-selected.service';
 
 describe('AddMoviesService', () => {
-  let service: AddMoviesService;
+  let service: HandleTvShowsSelected;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AddMoviesService);
+    service = TestBed.inject(HandleTvShowsSelected);
   });
 
   it('should be created', () => {

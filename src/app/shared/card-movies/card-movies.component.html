@@ -1,5 +1,33 @@
-<div class="card" style="width: 18rem">
-  <img src="{{ corverLink }}" class="card-img-top" alt="..." />
+<div class="container px-0">
+  <!-- <h3 class="main-title">Elenco</h3> -->
+  <drag-scroll #nav [scroll-x-wheel-enabled]="true">
+    @for (p of popularList; track $index) {
+    <div drag-scroll-item (click)="getClickCard($index)">
+      <div class="text-center bg-gradient bg-black p-2">
+        <img [src]="p.backdrop_path" class="card-img-top img" alt="..." />
+        <div class="text-center">
+          <h6 class="text-white text-truncate" style="max-width: 60vw">
+            {{ p.name + "(" + p.first_air_date + ")" }}
+          </h6>
+          <!-- <p class="fs-6 text-white">{{ p.type }}</p> -->
+        </div>
+      </div>
+    </div>
+
+    }
+  </drag-scroll>
+  <button (click)="moveLeft()">Left</button>
+  <button (click)="moveRight()">Right</button>
+  <button (click)="moveTo(2)">Last</button>
+</div>
+
+<!-- <div class="card bg-gradient bg-black text-white" style="width: 18rem">
+  <div>
+    <p class="h6 m-3">
+      {{ corverLink.name + "(" + corverLink.first_air_date + ")" }}
+    </p>
+  </div>
+  <img src="{{ corverLink.backdrop_path }}" class="card-img-top" alt="..." />
   <div class="card-body organize_btn">
     <button
       type="button"
@@ -21,4 +49,4 @@
       </div>
     </button>
   </div>
-</div>
+</div> -->
