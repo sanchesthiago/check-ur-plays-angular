@@ -13,16 +13,8 @@ import { EpisodesSeriesService } from './service/episodes-series.service';
   templateUrl: './episodes-series.component.html',
   styleUrl: './episodes-series.component.scss',
 })
-export class EpisodesSeriesComponent implements OnInit {
-  public episodesSeason!: Season;
-  private episodesSeriesService: EpisodesSeriesService = inject(
+export class EpisodesSeriesComponent {
+  public episodesSeriesService: EpisodesSeriesService = inject(
     EpisodesSeriesService
   );
-
-  ngOnInit(): void {
-    this.episodesSeriesService.getDetailsSeasons().subscribe((res) => {
-      this.episodesSeason = res;
-      console.log('EpisodesSeriesComponent', res);
-    });
-  }
 }

@@ -21,7 +21,7 @@ export interface Episode {
   runtime: number;
   season_number: number;
   show_id: number;
-  still_path: string;
+  still_path: string | null;
   vote_average: number;
   vote_count: number;
   crew: CrewMember[];

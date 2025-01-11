@@ -1,5 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { Season } from '../interface/detailsSeason';
+import {
+  inject,
+  Injectable,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
+import { Episode, Season } from '../interface/detailsSeason';
 import { Observable, tap } from 'rxjs';
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,6 +18,12 @@ export class EpisodesSeriesService {
     HandleTvShowsSelected
   );
   private http: HttpClient = inject(HttpClient);
+
+  public infosEpisodesSeries: WritableSignal<Array<Partial<Episode>>> = signal(
+    []
+  );
+  public infosEpisodesSeries$: Signal<Array<Partial<Episode>>> =
+    this.infosEpisodesSeries;
 
   getDetailsSeasons(): Observable<Season> {
     const season_number =

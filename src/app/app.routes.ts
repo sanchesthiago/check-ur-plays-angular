@@ -4,6 +4,7 @@ import { InformationsMoviesComponent } from './features/informations-movies/info
 import { EpisodesSeriesComponent } from './features/episodes-series/episodes-series.component';
 import { InformationMoviesResolver } from './features/informations-movies/resolver/information-movies.resolver'; // Atualizado
 import { homeResolver } from './features/top-buttons/resolver/home.resolver';
+import { episodesSeriesResolver } from './features/episodes-series/resolver/episodes-series.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,5 +18,9 @@ export const routes: Routes = [
     component: InformationsMoviesComponent,
     resolve: { compInfos: InformationMoviesResolver }, // Atualizado
   },
-  { path: 'destalhes-temporadas', component: EpisodesSeriesComponent },
+  {
+    path: 'destalhes-temporadas',
+    component: EpisodesSeriesComponent,
+    resolve: { compInfos: episodesSeriesResolver },
+  },
 ];

@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="bg-gradient bg-black p-2 text-white">
-  @for (item of episodesSeason.episodes; track $index) {
+  @for (item of episodesSeriesService.infosEpisodesSeries$(); track $index) {
 
   <div class="container mt-4 bg-gradient bg-black">
     <div class="row">

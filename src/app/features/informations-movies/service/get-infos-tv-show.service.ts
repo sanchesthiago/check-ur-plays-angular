@@ -10,12 +10,16 @@ import { Observable, tap } from 'rxjs';
 import { IInformationsTvShow } from '../interfaces/IInformations';
 import { teste } from '../../../shared/models/teste.mock';
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
+import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetInfosTvShowService {
   private http: HttpClient = inject(HttpClient);
+  private missingImgService: MissingImgHandleService = inject(
+    MissingImgHandleService
+  );
   private handleTvShowsSelected: HandleTvShowsSelected = inject(
     HandleTvShowsSelected
   );
@@ -32,6 +36,7 @@ export class GetInfosTvShowService {
       .pipe(
         tap((resp: IInformationsTvShow) => {
           this.infosTvShow.set(resp);
+          this.missingImgService.saveCoverForSeasons.set(resp.backdrop_path);
           console.log(resp); // Apenas para depuração
           return resp;
         })
