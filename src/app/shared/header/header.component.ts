@@ -15,7 +15,7 @@ export class HeaderComponent {
   public percentsWatched: PercentsWatchedMoviesService = inject(
     PercentsWatchedMoviesService
   );
-  public episodesSeason: Array<IEpisodesSeasons> = episodesSeason;
+  // public episodesSeason: Array<IEpisodesSeasons> = episodesSeason;
   isFixed = false;
 
   @HostListener('window:scroll', [])

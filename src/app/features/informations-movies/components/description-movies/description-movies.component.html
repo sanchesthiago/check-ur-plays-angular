@@ -17,11 +17,14 @@
   </div>
   <p class="h4 p-2">Temporadas</p>
   @for (item of infosTvShow.seasons; track $index) {
-  <app-seasons-shower
-    [season]="item.name"
-    [link]="item.poster_path"
-    [episodes]="item.episode_count"
-  ></app-seasons-shower>
+  <div>
+    <app-seasons-shower
+      [season]="item.name"
+      [link]="item.poster_path"
+      [episodes]="item.episode_count"
+      [index]="$index"
+    ></app-seasons-shower>
+  </div>
   }
 </div>
 }

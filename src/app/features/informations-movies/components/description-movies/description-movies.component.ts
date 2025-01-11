@@ -11,4 +11,8 @@ import { GetInfosTvShowService } from '../../service/get-infos-tv-show.service';
 })
 export class DescriptionMoviesComponent {
   public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
+
+  public getClickCard(index: number): void {
+    console.log('dsadsa', index);
+  }
 }
