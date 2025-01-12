@@ -1,6 +1,6 @@
 import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
-import { TvShow } from '../../features/top-buttons/interfaces/IHomeInterface';
-import { ISeasons } from '../../features/informations-movies/interfaces/IInformations';
+import { TvShow } from '../../features/home/interfaces/IHomeInterface';
+import { ISeasons } from '../../features/informations/interfaces/IInformations';
 
 @Injectable({
   providedIn: 'root',

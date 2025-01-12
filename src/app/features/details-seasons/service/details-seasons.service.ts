@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class EpisodesSeriesService {
+export class DetailSeasonsService {
   private handleTvShowsSelected: HandleTvShowsSelected = inject(
     HandleTvShowsSelected
   );

@@ -1,10 +1,9 @@
 import { Component, inject, Input, ViewChild } from '@angular/core';
 import { HandleTvShowsSelected } from '../service/handle-tv-shows-selected.service';
 import { Router } from '@angular/router';
-import { TvShow } from '../../features/top-buttons/interfaces/IHomeInterface';
 import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 import { CommonModule } from '@angular/common';
-import { HomeTvShowService } from '../../features/top-buttons/service/home-tv-show.service';
+import { TvShow } from '../../features/home/interfaces/IHomeInterface';
 
 @Component({
   selector: 'app-card-movies',

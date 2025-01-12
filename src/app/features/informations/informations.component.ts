@@ -5,16 +5,16 @@ import { DescriptionMoviesComponent } from './components/description-movies/desc
 import { GetInfosTvShowService } from './service/get-infos-tv-show.service';
 
 @Component({
-  selector: 'app-informations-movies',
+  selector: 'app-informations',
   standalone: true,
   imports: [
     ActionsMoviesComponent,
     CastMoviesComponent,
     DescriptionMoviesComponent,
   ],
-  templateUrl: './informations-movies.component.html',
-  styleUrl: './informations-movies.component.scss',
+  templateUrl: './informations.component.html',
+  styleUrl: './informations.component.scss',
 })
-export class InformationsMoviesComponent {
+export class InformationsComponent {
   public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
 }

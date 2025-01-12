@@ -12,7 +12,7 @@ import { MissingImgHandleService } from '../../../shared/service/missing-img-han
 @Injectable({
   providedIn: 'root', // Torna o resolver disponível como um serviço global
 })
-export class InformationMoviesResolver
+export class InformationsResolver
   implements Resolve<Partial<IInformationsTvShow>>
 {
   private informationService: GetInfosTvShowService = inject(

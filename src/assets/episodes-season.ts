@@ -1,4 +1,4 @@
-import { Season } from '../app/features/episodes-series/interface/detailsSeason';
+import { Season } from '../app/features/details-seasons/interface/detailsSeason';
 
 export const episodesSeason: Season = {
   _id: '5d753a082ea6b90010bff496',

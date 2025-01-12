@@ -1,26 +1,26 @@
 import { Routes } from '@angular/router';
-import { TopButtonsComponent } from './features/top-buttons/top-buttons.component';
-import { InformationsMoviesComponent } from './features/informations-movies/informations-movies.component';
-import { EpisodesSeriesComponent } from './features/episodes-series/episodes-series.component';
-import { InformationMoviesResolver } from './features/informations-movies/resolver/information-movies.resolver'; // Atualizado
-import { homeResolver } from './features/top-buttons/resolver/home.resolver';
-import { episodesSeriesResolver } from './features/episodes-series/resolver/episodes-series.resolver';
+import { homeResolver } from './features/home/resolver/home.resolver';
+import { HomeComponent } from './features/home/home.component';
+import { DetailsSeasonsResolver } from './features/details-seasons/resolver/details-seasons.resolver';
+import { DetailsSeasonsComponent } from './features/details-seasons/details-seasons.component';
+import { InformationsComponent } from './features/informations/informations.component';
+import { InformationsResolver } from './features/informations/resolver/informations.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
-    component: TopButtonsComponent,
+    component: HomeComponent,
     resolve: { compInfos: homeResolver },
   },
   {
     path: 'informacao',
-    component: InformationsMoviesComponent,
-    resolve: { compInfos: InformationMoviesResolver }, // Atualizado
+    component: InformationsComponent,
+    resolve: { compInfos: InformationsResolver }, // Atualizado
   },
   {
     path: 'destalhes-temporadas',
-    component: EpisodesSeriesComponent,
-    resolve: { compInfos: episodesSeriesResolver },
+    component: DetailsSeasonsComponent,
+    resolve: { compInfos: DetailsSeasonsResolver },
   },
 ];

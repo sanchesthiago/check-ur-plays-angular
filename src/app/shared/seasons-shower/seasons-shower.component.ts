@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GetInfosTvShowService } from '../../features/informations-movies/service/get-infos-tv-show.service';
 import { HandleTvShowsSelected } from '../service/handle-tv-shows-selected.service';
+import { GetInfosTvShowService } from '../../features/informations/service/get-infos-tv-show.service';
 
 @Component({
   selector: 'app-seasons-shower',

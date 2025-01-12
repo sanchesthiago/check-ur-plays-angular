@@ -5,21 +5,12 @@ import { AlertsMoviesComponent } from '../../shared/alerts-movies/alerts-movies.
 import { HomeTvShowService } from './service/home-tv-show.service';
 
 @Component({
-  selector: 'app-top-buttons',
+  selector: 'app-home',
   standalone: true,
   imports: [CardMoviesComponent, AlertsMoviesComponent],
-  templateUrl: './top-buttons.component.html',
-  styleUrl: './top-buttons.component.scss',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
-export class TopButtonsComponent implements OnInit {
+export class HomeComponent {
   public infosComp: HomeTvShowService = inject(HomeTvShowService);
-  public nowTrending: Array<ITrendinsLink> = [];
-  ngOnInit(): void {
-    this.nowTrending = [
-      { link: '../../../assets/dragao.jpg' },
-      { link: '../../../assets/dragao.jpg' },
-      { link: '../../../assets/dragao.jpg' },
-      { link: '../../../assets/dragao.jpg' },
-    ];
-  }
 }

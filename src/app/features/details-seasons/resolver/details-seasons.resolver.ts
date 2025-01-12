@@ -1,19 +1,18 @@
 import { Resolve, ResolveFn } from '@angular/router';
 import { Observable, map, of, tap } from 'rxjs';
 import { Episode, Season } from '../interface/detailsSeason';
-import { EpisodesSeriesService } from '../service/episodes-series.service';
+import { DetailSeasonsService } from '../service/details-seasons.service';
 import { inject, Injectable } from '@angular/core';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
 
 @Injectable({
   providedIn: 'root', // Torna o resolver disponível como um serviço global
 })
-export class episodesSeriesResolver
+export class DetailsSeasonsResolver
   implements Resolve<Array<Partial<Episode>>>
 {
-  private episodesSeriesService: EpisodesSeriesService = inject(
-    EpisodesSeriesService
-  );
+  private episodesSeriesService: DetailSeasonsService =
+    inject(DetailSeasonsService);
   private missingImgService: MissingImgHandleService = inject(
     MissingImgHandleService
   );
