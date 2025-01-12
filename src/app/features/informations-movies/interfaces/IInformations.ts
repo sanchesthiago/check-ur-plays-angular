@@ -6,7 +6,8 @@ export interface IInformationsTvShow {
   name: string; // Nome da série
   genres: string[]; // Apenas os nomes dos gêneros
   overview: string; // Resumo da série
-  poster: string; // URL completa do poster
+  poster: string;
+  poster_path: string; // URL completa do poster
   voteAverage: number; // Média de votos
   number_of_episodes: number; // Número total de episódios
   number_of_seasons: number; // Número total de temporadas
@@ -20,7 +21,7 @@ export interface ISeasons {
   id: number;
   name: string;
   overview: string;
-  poster_path: string | null; // URL do poster ou `null` se não houver
+  poster_path: string; // URL do poster ou `null` se não houver
   season_number: number;
   vote_average: number;
 }

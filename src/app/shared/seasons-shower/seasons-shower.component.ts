@@ -23,6 +23,7 @@ export class SeasonsShowerComponent {
 
   sendToEpisodes(index: any) {
     this.handleTvShowsSelected.selectedSeason.set(
+      //@ts-ignore
       this.infos.infosTvShow$().seasons[index]
     );
     this.router.navigate(['destalhes-temporadas']);

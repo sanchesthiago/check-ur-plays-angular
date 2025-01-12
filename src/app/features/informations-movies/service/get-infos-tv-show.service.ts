@@ -23,20 +23,17 @@ export class GetInfosTvShowService {
   private handleTvShowsSelected: HandleTvShowsSelected = inject(
     HandleTvShowsSelected
   );
-  public infosTvShow: WritableSignal<IInformationsTvShow> = signal(teste);
-  public infosTvShow$: Signal<IInformationsTvShow> = this.infosTvShow;
+  public infosTvShow: WritableSignal<Partial<IInformationsTvShow>> = signal({});
+  public infosTvShow$: Signal<Partial<IInformationsTvShow>> = this.infosTvShow;
 
   getInfos(): Observable<IInformationsTvShow> {
     const selectedIdTvShow = this.handleTvShowsSelected.selectedTvShow$().id;
-    console.log('ID', teste);
     return this.http
       .get<IInformationsTvShow>(
         `http://localhost:9010/tvserie/byType/${selectedIdTvShow}`
       )
       .pipe(
         tap((resp: IInformationsTvShow) => {
-          this.infosTvShow.set(resp);
-          this.missingImgService.saveCoverForSeasons.set(resp.backdrop_path);
           console.log(resp); // Apenas para depuração
           return resp;
         })
