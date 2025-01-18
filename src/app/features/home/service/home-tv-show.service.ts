@@ -8,12 +8,16 @@ import {
 } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IHomeTvShow, TvShow } from '../interfaces/IHomeInterface';
+import { DbService } from '../../../shared/service/db.service';
+import { GetInfosTvShowService } from '../../informations/service/get-infos-tv-show.service';
+import { IInformationsDB } from '../../informations/components/actions-movies/actions-movies.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeTvShowService {
   public http: HttpClient = inject(HttpClient);
+
   public HomeTvShowPopularity: WritableSignal<Array<Partial<TvShow>>> = signal([
     {
       backdrop_path: '',
@@ -30,7 +34,7 @@ export class HomeTvShowService {
       .get<IHomeTvShow>('http://localhost:9010/tvserie/popular')
       .pipe(
         tap((resp: IHomeTvShow) => {
-          console.log(resp); // Apenas para depuração
+          console.log('Page Home Service', resp); // Apenas para depuração
           return resp;
         })
       );

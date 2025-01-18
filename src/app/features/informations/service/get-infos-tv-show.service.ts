@@ -11,12 +11,15 @@ import { IInformationsTvShow } from '../interfaces/IInformations';
 import { teste } from '../../../shared/models/teste.mock';
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
+import { IInformationsDB } from '../components/actions-movies/actions-movies.component';
+import { DbService } from '../../../shared/service/db.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetInfosTvShowService {
   private http: HttpClient = inject(HttpClient);
+  public dbSvc: DbService = inject(DbService);
   private missingImgService: MissingImgHandleService = inject(
     MissingImgHandleService
   );
@@ -34,9 +37,47 @@ export class GetInfosTvShowService {
       )
       .pipe(
         tap((resp: IInformationsTvShow) => {
-          console.log(resp); // Apenas para depuração
+          console.log('Page Information Service', resp); // Apenas para depuração
           return resp;
         })
       );
+  }
+
+  public async saveInformationsForDb(isSelected: IInformationsDB) {
+    try {
+      await this.dbSvc.db.seriesDataBase.upsert({
+        id: this.infosTvShow$().id?.toString(),
+        serie: {
+          id: '2',
+          fullWatched: isSelected.fullWatched ?? false,
+          isFavorit: isSelected.favorit ?? false,
+        },
+      });
+    } catch (error) {
+      alert('Deu Ruim');
+      console.error(error);
+      throw error;
+    }
+  }
+
+  public async getInformationfromDb() {
+    console.log(this.handleTvShowsSelected.selectedTvShow$().id?.toString());
+    try {
+      return await this.dbSvc.db.seriesDataBase
+        .findOne({
+          selector: {
+            id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
+          },
+        })
+        .exec()
+        .then((doc) => {
+          console.dir(doc._data);
+          return doc;
+        });
+    } catch (error) {
+      alert('Deu Ruim');
+      console.error(error);
+      throw error;
+    }
   }
 }

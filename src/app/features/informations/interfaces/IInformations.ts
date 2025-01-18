@@ -13,6 +13,7 @@ export interface IInformationsTvShow {
   number_of_seasons: number; // Número total de temporadas
   original_name: string; // Nome original da série
   seasons: Array<ISeasons>;
+  informationFromDb: any;
 }
 
 export interface ISeasons {

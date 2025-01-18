@@ -39,7 +39,7 @@ export class DetailSeasonsService {
       .get<Season>(`http://localhost:9010/tvserie/details-season`, { headers })
       .pipe(
         tap((resp: Season) => {
-          console.log(resp); // Apenas para depuração
+          console.log('Page Detalhes Temporada Service', resp); // Apenas para depuração
           return resp;
         })
       );

@@ -25,6 +25,8 @@ export class homeResolver implements Resolve<Array<Partial<TvShow>>> {
           }
         );
         this.homeTvShowService.HomeTvShowPopularity.set(filterResults);
+        console.log('Page Home Component', filterResults); // Apenas para depuração
+
         return filterResults;
       })
     );

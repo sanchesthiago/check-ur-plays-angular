@@ -3,6 +3,7 @@ import { ActionsMoviesComponent } from './components/actions-movies/actions-movi
 import { CastMoviesComponent } from '../../shared/cast-movies/cast-movies.component';
 import { DescriptionMoviesComponent } from './components/description-movies/description-movies.component';
 import { GetInfosTvShowService } from './service/get-infos-tv-show.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-informations',
@@ -11,6 +12,7 @@ import { GetInfosTvShowService } from './service/get-infos-tv-show.service';
     ActionsMoviesComponent,
     CastMoviesComponent,
     DescriptionMoviesComponent,
+    CommonModule,
   ],
   templateUrl: './informations.component.html',
   styleUrl: './informations.component.scss',

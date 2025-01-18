@@ -5,9 +5,10 @@ import {
 } from '@angular/router';
 import { IInformationsTvShow } from '../interfaces/IInformations';
 import { GetInfosTvShowService } from '../service/get-infos-tv-show.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
+import { DbService } from '../../../shared/service/db.service';
 
 @Injectable({
   providedIn: 'root', // Torna o resolver disponível como um serviço global
@@ -26,9 +27,13 @@ export class InformationsResolver
     return this.informationService.getInfos().pipe(
       map((res: IInformationsTvShow) => {
         //salva img da temporada atual para usar dentro das temporadas que nao tem img
-        this.missingImgService.saveCoverForSeasons.set(res.poster_path);
+        this.missingImgService.saveCovers.set({
+          seasons: res.poster_path,
+          episodes: '',
+        });
 
         const filterResults: Partial<IInformationsTvShow> = {
+          id: res.id,
           backdrop_path: `https://image.tmdb.org/t/p/w500${res.backdrop_path}`,
           seasons: res.seasons.map((path) => ({
             ...path,
@@ -41,16 +46,16 @@ export class InformationsResolver
           name: res.name,
           poster: `https://image.tmdb.org/t/p/w500${res.poster}`,
           poster_path: `https://image.tmdb.org/t/p/w500${res.poster_path}`,
+          informationFromDb: this.informationService.getInformationfromDb(),
         };
-        console.log('res', res);
-        console.log('filterResults', filterResults);
-
         this.informationService.infosTvShow.set(filterResults);
+        console.log('Page Information Componente', filterResults); // Apenas para depuração
 
         //salva img de fundo da temporada atual para usar dentro dos episodios que nao tem img
-        this.missingImgService.saveCoverForEpisodes.set(
-          <string>filterResults.backdrop_path
-        );
+        this.missingImgService.saveCovers.set({
+          seasons: '',
+          episodes: <string>filterResults.backdrop_path,
+        });
         return filterResults;
       })
     );

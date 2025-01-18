@@ -32,8 +32,8 @@ export class DetailsSeasonsResolver
             };
           }
         );
-        console.log('teste', filterResults);
         this.episodesSeriesService.infosEpisodesSeries.set(filterResults);
+        console.log('Page Detalhes Temporada Componente', filterResults); // Apenas para depuração
         return filterResults;
       })
     );
