@@ -4,6 +4,9 @@ import { CastMoviesComponent } from '../../shared/cast-movies/cast-movies.compon
 import { DescriptionMoviesComponent } from './components/description-movies/description-movies.component';
 import { GetInfosTvShowService } from './service/get-infos-tv-show.service';
 import { CommonModule } from '@angular/common';
+import { Observable, tap } from 'rxjs';
+import { DbService } from '../../shared/service/db.service';
+import { HandleTvShowsSelected } from '../../shared/service/handle-tv-shows-selected.service';
 
 @Component({
   selector: 'app-informations',
@@ -17,6 +20,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './informations.component.html',
   styleUrl: './informations.component.scss',
 })
-export class InformationsComponent {
-  public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
-}
+export class InformationsComponent {}

@@ -28,4 +28,14 @@ export class SeasonsShowerComponent {
     );
     this.router.navigate(['destalhes-temporadas']);
   }
+
+  watchedSeason(index: number, event: any): void {
+    //@ts-ignore
+    const teste = this.infos.infosTvShow$().seasons[index];
+    console.log('dsadsa', teste);
+    event?.stopPropagation();
+  }
+  // stopPropagation(event: any) {
+  //   event?.stopPropagation();
+  // }
 }

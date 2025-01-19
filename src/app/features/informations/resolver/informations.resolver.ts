@@ -46,7 +46,7 @@ export class InformationsResolver
           name: res.name,
           poster: `https://image.tmdb.org/t/p/w500${res.poster}`,
           poster_path: `https://image.tmdb.org/t/p/w500${res.poster_path}`,
-          informationFromDb: this.informationService.getInformationfromDb(),
+          // informationFromDb: this.informationService.getInformationfromDb(),
         };
         this.informationService.infosTvShow.set(filterResults);
         console.log('Page Information Componente', filterResults); // Apenas para depuração

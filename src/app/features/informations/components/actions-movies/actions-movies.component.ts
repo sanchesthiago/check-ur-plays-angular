@@ -1,51 +1,75 @@
 import { Component, inject } from '@angular/core';
 import { GetInfosTvShowService } from '../../service/get-infos-tv-show.service';
 import { DbService } from '../../../../shared/service/db.service';
+import { Observable, tap } from 'rxjs';
+import { HandleTvShowsSelected } from '../../../../shared/service/handle-tv-shows-selected.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-actions-movies',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './actions-movies.component.html',
-  styleUrl: './actions-movies.component.scss',
+  styleUrls: ['./actions-movies.component.scss'],
 })
 export class ActionsMoviesComponent {
+  public isFavorit: boolean = true;
+  public infosFromDb$: Observable<any> | undefined;
   public isSelected: IInformationsDB = {
     fullWatched: false,
     favorit: false,
   };
-  public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
+
+  private handleTvShowsSelected: HandleTvShowsSelected = inject(
+    HandleTvShowsSelected
+  );
   private dbSvc: DbService = inject(DbService);
+  public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
+
+  constructor() {
+    this.initialize();
+  }
+
+  async initialize() {
+    try {
+      const selectedTvShowId = this.handleTvShowsSelected
+        .selectedTvShow$()
+        .id?.toString();
+      if (selectedTvShowId) {
+        this.infosFromDb$ = this.dbSvc.db.seriesDataBase
+          .findOne({
+            selector: { id: selectedTvShowId },
+          })
+          .$.pipe(
+            tap((res: any) => {
+              if (res?.series) {
+                this.isSelected.favorit = res.series.isFavorit;
+                this.isSelected.fullWatched = res.series.fullWatched;
+              }
+              console.log(res);
+            })
+          );
+      }
+    } catch (error) {
+      console.error('Error initializing data:', error);
+    }
+  }
 
   public async fullWatched($event: string) {
-    // this.isSelected = !this.isSelected;
-    if ($event === 'fullWacthed') {
+    if ($event === 'fullWatched') {
       this.isSelected.fullWatched = !this.isSelected.fullWatched;
     } else {
       this.isSelected.favorit = !this.isSelected.favorit;
     }
-    this.infos.saveInformationsForDb(this.isSelected);
-    console.log('this.isSelected', this.isSelected);
+    try {
+      await this.infos.saveInformationsForDb(this.isSelected);
+      console.log('this.isSelected', this.isSelected);
+    } catch (error) {
+      console.error('Error saving information:', error);
+    }
   }
-  // public async favorite() {
-  //   this.isSelected = !this.isSelected;
-  //   try {
-  //     await this.dbSvc.db.seriesDataBase.upsert({
-  //       id: this.infos.infosTvShow$().id?.toString(),
-  //       serie: {
-  //         id: '2',
-  //         isFavorit: this.isSelected,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     alert('Deu Ruim');
-  //     console.error(error);
-  //     throw error;
-  //   }
-
-  //   console.log('this.isSelected', this.isSelected);
-  // }
 }
+
 export interface IInformationsDB {
   fullWatched: boolean;
   favorit: boolean;

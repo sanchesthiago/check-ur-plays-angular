@@ -20,13 +20,24 @@
     </div>
   </div>
 </div>
+} @if((infosFromDb$ | async)||infos.infosTvShow$(); as infosFromDb){
 <div class="container text-center mt-4 center">
   <div class="row color_actions p-3">
-    <div class="col-4" (click)="fullWatched('fullWacthed')">
+    <div
+      class="col-4"
+      (click)="fullWatched('fullWatched')"
+      [ngStyle]="{
+        color: infosFromDb?.series?.fullWatched ? 'green' : 'white'
+      }"
+    >
       <i class="bi bi-check2-circle"></i>
       <p class="h6">Assistido</p>
     </div>
-    <div class="col-4" (click)="fullWatched('favorit')">
+    <div
+      class="col-4"
+      (click)="fullWatched('favorit')"
+      [ngStyle]="{ color: infosFromDb?.series?.isFavorit ? 'green' : 'white' }"
+    >
       <i class="bi bi-card-checklist"></i>
       <p class="h6">Add a Lista</p>
     </div>

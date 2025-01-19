@@ -28,6 +28,7 @@ export class GetInfosTvShowService {
   );
   public infosTvShow: WritableSignal<Partial<IInformationsTvShow>> = signal({});
   public infosTvShow$: Signal<Partial<IInformationsTvShow>> = this.infosTvShow;
+  public infosFromDb$!: Observable<any>;
 
   getInfos(): Observable<IInformationsTvShow> {
     const selectedIdTvShow = this.handleTvShowsSelected.selectedTvShow$().id;
@@ -47,10 +48,20 @@ export class GetInfosTvShowService {
     try {
       await this.dbSvc.db.seriesDataBase.upsert({
         id: this.infosTvShow$().id?.toString(),
-        serie: {
+        series: {
           id: '2',
           fullWatched: isSelected.fullWatched ?? false,
           isFavorit: isSelected.favorit ?? false,
+        },
+        seasons: {
+          season: {
+            properties: [
+              {
+                id: '1',
+                watched: false,
+              },
+            ],
+          },
         },
       });
     } catch (error) {
@@ -60,24 +71,19 @@ export class GetInfosTvShowService {
     }
   }
 
-  public async getInformationfromDb() {
-    console.log(this.handleTvShowsSelected.selectedTvShow$().id?.toString());
-    try {
-      return await this.dbSvc.db.seriesDataBase
-        .findOne({
-          selector: {
-            id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
-          },
+  public async getInformationfromDb(): Promise<any> {
+    this.infosFromDb$ = await this.dbSvc.db.seriesDataBase
+      .findOne({
+        selector: {
+          id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
+        },
+      })
+      .$.pipe(
+        tap((res: any) => {
+          console.log('infoDB', res); // Apenas para depuração
+          return res;
         })
-        .exec()
-        .then((doc) => {
-          console.dir(doc._data);
-          return doc;
-        });
-    } catch (error) {
-      alert('Deu Ruim');
-      console.error(error);
-      throw error;
-    }
+      );
+    return this.infosFromDb$;
   }
 }
