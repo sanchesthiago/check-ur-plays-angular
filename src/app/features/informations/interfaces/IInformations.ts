@@ -1,3 +1,6 @@
+import { Signal } from '@angular/core';
+import { IDbSerieComponent } from '../../../shared/interfaces/IDbSerieComponent';
+
 export interface IInformationsTvShow {
   id: number; // ID da série
   adult: boolean; // Indica se o conteúdo é adulto

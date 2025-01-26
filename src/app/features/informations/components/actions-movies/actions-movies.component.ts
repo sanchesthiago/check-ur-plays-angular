@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { GetInfosTvShowService } from '../../service/get-infos-tv-show.service';
 import { DbService } from '../../../../shared/service/db.service';
 import { Observable, tap } from 'rxjs';
@@ -26,34 +26,7 @@ export class ActionsMoviesComponent {
   private dbSvc: DbService = inject(DbService);
   public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
 
-  constructor() {
-    this.initialize();
-  }
-
-  async initialize() {
-    try {
-      const selectedTvShowId = this.handleTvShowsSelected
-        .selectedTvShow$()
-        .id?.toString();
-      if (selectedTvShowId) {
-        this.infosFromDb$ = this.dbSvc.db.seriesDataBase
-          .findOne({
-            selector: { id: selectedTvShowId },
-          })
-          .$.pipe(
-            tap((res: any) => {
-              if (res?.series) {
-                this.isSelected.favorit = res.series.isFavorit;
-                this.isSelected.fullWatched = res.series.fullWatched;
-              }
-              console.log(res);
-            })
-          );
-      }
-    } catch (error) {
-      console.error('Error initializing data:', error);
-    }
-  }
+  constructor() {}
 
   public async fullWatched($event: string) {
     if ($event === 'fullWatched') {

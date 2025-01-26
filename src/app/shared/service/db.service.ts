@@ -1,16 +1,35 @@
 import { RxDBJsonDumpPlugin } from 'rxdb/plugins/json-dump';
-import { Injectable } from '@angular/core';
-import { createRxDatabase, addRxPlugin } from 'rxdb/plugins/core';
+import { Injectable, Signal, untracked, Injector } from '@angular/core';
+import {
+  createRxDatabase,
+  addRxPlugin,
+  RxReactivityFactory,
+} from 'rxdb/plugins/core';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { SERIE_DB_SCHEMA } from '../interfaces/series-db.model';
 import { RxSerieDatabase } from '../../RxDB';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 addRxPlugin(RxDBJsonDumpPlugin);
 
-async function createDataBase(): Promise<any> {
+async function createDataBase(injector: Injector): Promise<any> {
+  const reactivityFactory: RxReactivityFactory<Signal<any>> = {
+    fromObservable(obs, initialValue: any) {
+      return untracked(() =>
+        toSignal(obs, {
+          initialValue,
+          injector,
+          rejectErrors: true,
+        })
+      );
+    },
+  };
   const db = await createRxDatabase<any>({
     name: 'series-db',
     storage: getRxStorageDexie(),
+    reactivity: reactivityFactory,
   });
+  console.log('DatabaseService: created database');
 
   await db.addCollections({
     seriesDataBase: {
@@ -25,9 +44,12 @@ async function createDataBase(): Promise<any> {
 let initState: null | Promise<any>;
 let DB_INSTANCE: any;
 
-export async function initDatabase() {
+export async function initDatabase(injector: Injector) {
+  if (!injector) {
+    throw new Error('initDatabase() injector missing');
+  }
   if (!initState) {
-    initState = createDataBase().then((db) => (DB_INSTANCE = db));
+    initState = createDataBase(injector).then((db) => (DB_INSTANCE = db));
   }
   await initState;
 }
@@ -39,5 +61,4 @@ export class DbService {
   get db(): RxSerieDatabase {
     return DB_INSTANCE;
   }
-  constructor() {}
 }

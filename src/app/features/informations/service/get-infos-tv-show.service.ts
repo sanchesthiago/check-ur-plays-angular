@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import {
   inject,
   Injectable,
+  NgZone,
   signal,
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { from, Observable, of, tap } from 'rxjs';
 import { IInformationsTvShow } from '../interfaces/IInformations';
 import { teste } from '../../../shared/models/teste.mock';
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
@@ -28,7 +29,6 @@ export class GetInfosTvShowService {
   );
   public infosTvShow: WritableSignal<Partial<IInformationsTvShow>> = signal({});
   public infosTvShow$: Signal<Partial<IInformationsTvShow>> = this.infosTvShow;
-  public infosFromDb$!: Observable<any>;
 
   getInfos(): Observable<IInformationsTvShow> {
     const selectedIdTvShow = this.handleTvShowsSelected.selectedTvShow$().id;
@@ -50,8 +50,8 @@ export class GetInfosTvShowService {
         id: this.infosTvShow$().id?.toString(),
         series: {
           id: '2',
-          fullWatched: isSelected.fullWatched ?? false,
-          isFavorit: isSelected.favorit ?? false,
+          fullWatched: isSelected.fullWatched,
+          isFavorit: isSelected.favorit,
         },
         seasons: {
           season: {
@@ -71,19 +71,22 @@ export class GetInfosTvShowService {
     }
   }
 
-  public async getInformationfromDb(): Promise<any> {
-    this.infosFromDb$ = await this.dbSvc.db.seriesDataBase
-      .findOne({
-        selector: {
-          id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
-        },
-      })
-      .$.pipe(
-        tap((res: any) => {
-          console.log('infoDB', res); // Apenas para depuração
-          return res;
-        })
-      );
-    return this.infosFromDb$;
+  public getInformationfromDb(): Signal<any> {
+    return this.dbSvc.db.seriesDataBase.findOne({
+      selector: {
+        id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
+      },
+    }).$$ as Signal<any>;
   }
 }
+
+// public getInformationfromDb(): Observable<any> {
+//     return from(
+//       this.dbSvc.db.seriesDataBase
+//         .find({
+//           selector: {},
+//           sort: [{ id: 'desc' }],
+//         })
+//         .exec()
+//     );
+//   }

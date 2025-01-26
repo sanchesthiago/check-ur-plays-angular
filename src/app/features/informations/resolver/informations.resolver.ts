@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 import { IInformationsTvShow } from '../interfaces/IInformations';
 import { GetInfosTvShowService } from '../service/get-infos-tv-show.service';
-import { map, Observable, tap } from 'rxjs';
+import { forkJoin, map, Observable, tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
 import { DbService } from '../../../shared/service/db.service';
@@ -46,7 +46,7 @@ export class InformationsResolver
           name: res.name,
           poster: `https://image.tmdb.org/t/p/w500${res.poster}`,
           poster_path: `https://image.tmdb.org/t/p/w500${res.poster_path}`,
-          // informationFromDb: this.informationService.getInformationfromDb(),
+          informationFromDb: this.informationService.getInformationfromDb(),
         };
         this.informationService.infosTvShow.set(filterResults);
         console.log('Page Information Componente', filterResults); // Apenas para depuração
