@@ -14,6 +14,7 @@ import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-s
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
 import { IInformationsDB } from '../components/actions-movies/actions-movies.component';
 import { DbService } from '../../../shared/service/db.service';
+import { IDbSerieComponent } from '../../../shared/interfaces/IDbSerieComponent';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,7 @@ export class GetInfosTvShowService {
   public async saveInformationsForDb(isSelected: IInformationsDB) {
     try {
       await this.dbSvc.db.seriesDataBase.upsert({
-        id: this.infosTvShow$().id?.toString(),
+        id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
         series: {
           id: '2',
           fullWatched: isSelected.fullWatched,
@@ -71,22 +72,23 @@ export class GetInfosTvShowService {
     }
   }
 
-  public getInformationfromDb(): Signal<any> {
+  public getInformationfromDb(): Signal<IDbSerieComponent> {
     return this.dbSvc.db.seriesDataBase.findOne({
       selector: {
         id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
       },
     }).$$ as Signal<any>;
   }
+  public async getInformationfromDb2(): Promise<any> {
+    return await this.dbSvc.db.seriesDataBase
+      .findOne({
+        selector: {
+          id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
+        },
+      })
+      .exec()
+      .then((res) => {
+        return res;
+      });
+  }
 }
-
-// public getInformationfromDb(): Observable<any> {
-//     return from(
-//       this.dbSvc.db.seriesDataBase
-//         .find({
-//           selector: {},
-//           sort: [{ id: 'desc' }],
-//         })
-//         .exec()
-//     );
-//   }
