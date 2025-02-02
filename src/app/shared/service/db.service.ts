@@ -9,6 +9,8 @@ import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { SERIE_DB_SCHEMA } from '../interfaces/series-db.model';
 import { RxSerieDatabase } from '../../RxDB';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SEASON_DB_SCHEMA } from '../interfaces/season-db.model';
+import { EPISODE_DB_SCHEMA } from '../interfaces/episode-db.model';
 
 addRxPlugin(RxDBJsonDumpPlugin);
 
@@ -34,6 +36,12 @@ async function createDataBase(injector: Injector): Promise<any> {
   await db.addCollections({
     seriesDataBase: {
       schema: SERIE_DB_SCHEMA,
+    },
+    seasonDataBase: {
+      schema: SEASON_DB_SCHEMA,
+    },
+    episodeDataBase: {
+      schema: EPISODE_DB_SCHEMA,
     },
   });
 

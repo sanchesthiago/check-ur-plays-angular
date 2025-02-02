@@ -17,6 +17,8 @@ export type RxSerieDBCollection = RxCollection<RxSerieDBDocumentType, {}, {}>;
 
 export type RxSerieDBCollections = {
   seriesDataBase: RxSerieDBCollection;
+  seasonDataBase;
+  episodeDataBase;
 };
 
 export type RxSerieDatabase = RxDatabase<RxSerieDBCollections>;

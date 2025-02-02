@@ -16,7 +16,8 @@ export interface IInformationsTvShow {
   number_of_seasons: number; // Número total de temporadas
   original_name: string; // Nome original da série
   seasons: Array<ISeasons>;
-  informationFromDb: any;
+  serieInformationFromDb: any;
+  seasonInformationFromDb: any;
 }
 
 export interface ISeasons {
@@ -28,6 +29,7 @@ export interface ISeasons {
   poster_path: string; // URL do poster ou `null` se não houver
   season_number: number;
   vote_average: number;
+  watched?: boolean;
 }
 
 export interface created_by {

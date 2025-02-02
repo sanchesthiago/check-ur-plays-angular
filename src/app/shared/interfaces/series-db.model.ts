@@ -18,33 +18,6 @@ export const SERIES_DB_SCHEMA_LITERAL = {
       fullWatched: 'boolean',
       isFavorit: 'boolean',
     },
-    seasons: {
-      type: 'array',
-      season: {
-        type: 'object',
-        properties: [
-          {
-            id: 'string',
-            type: 'boolean',
-            watched: 'boolean',
-          },
-        ],
-      },
-    },
-    epsisodes: {
-      type: 'array',
-      episode: {
-        type: 'object',
-        properties: [
-          {
-            id: 'string',
-            type: 'boolean',
-            watched: 'boolean',
-          },
-        ],
-      },
-    },
-
     // content: { type: 'string' },
     // timestamp: { type: 'date-time' },
   },
@@ -60,51 +33,52 @@ export const SERIE_DB_SCHEMA: RxJsonSchema<RxMessageDocumentType> =
 export const SERIE_MOCK = {
   id: '52',
   serie: {
-    id: '2',
     type: true,
     fullWatched: true,
     isFavorit: true,
   },
-  seasons: {
-    season: {
-      properties: [
-        {
-          id: '1',
-          type: true,
-          watched: true,
-        },
-        {
-          id: '2',
-          type: true,
-          watched: true,
-        },
-        {
-          id: '3',
-          type: true,
-          watched: true,
-        },
-      ],
-    },
+};
+export const SEASON_MOCK_2 = {
+  id: '52',
+  season: {
+    properties: [
+      {
+        id: '1',
+        type: true,
+        watched: true,
+      },
+      {
+        id: '2',
+        type: true,
+        watched: true,
+      },
+      {
+        id: '3',
+        type: true,
+        watched: true,
+      },
+    ],
   },
+};
+export const EPISODE_MOCK_3 = {
+  id: '52',
   epsisodes: {
-    episode: {
-      properties: [
-        {
-          id: '1',
-          type: true,
-          watched: true,
-        },
-        {
-          id: '2',
-
-          watched: true,
-        },
-        {
-          id: '3',
-
-          watched: true,
-        },
-      ],
-    },
+    properties: [
+      {
+        id: '1',
+        type: true,
+        watched: true,
+      },
+      {
+        id: '2',
+        type: true,
+        watched: true,
+      },
+      {
+        id: '3',
+        type: true,
+        watched: true,
+      },
+    ],
   },
 };

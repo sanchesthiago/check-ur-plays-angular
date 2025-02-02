@@ -21,7 +21,7 @@ import { IDbSerieComponent } from '../../../shared/interfaces/IDbSerieComponent'
 })
 export class GetInfosTvShowService {
   private http: HttpClient = inject(HttpClient);
-  public dbSvc: DbService = inject(DbService);
+
   private missingImgService: MissingImgHandleService = inject(
     MissingImgHandleService
   );
@@ -43,52 +43,5 @@ export class GetInfosTvShowService {
           return resp;
         })
       );
-  }
-
-  public async saveInformationsForDb(isSelected: IInformationsDB) {
-    try {
-      await this.dbSvc.db.seriesDataBase.upsert({
-        id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
-        series: {
-          id: '2',
-          fullWatched: isSelected.fullWatched,
-          isFavorit: isSelected.favorit,
-        },
-        seasons: {
-          season: {
-            properties: [
-              {
-                id: '1',
-                watched: false,
-              },
-            ],
-          },
-        },
-      });
-    } catch (error) {
-      alert('Deu Ruim');
-      console.error(error);
-      throw error;
-    }
-  }
-
-  public getInformationfromDb(): Signal<IDbSerieComponent> {
-    return this.dbSvc.db.seriesDataBase.findOne({
-      selector: {
-        id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
-      },
-    }).$$ as Signal<any>;
-  }
-  public async getInformationfromDb2(): Promise<any> {
-    return await this.dbSvc.db.seriesDataBase
-      .findOne({
-        selector: {
-          id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
-        },
-      })
-      .exec()
-      .then((res) => {
-        return res;
-      });
   }
 }

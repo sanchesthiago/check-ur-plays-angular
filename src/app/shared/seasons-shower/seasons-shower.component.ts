@@ -2,24 +2,29 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HandleTvShowsSelected } from '../service/handle-tv-shows-selected.service';
 import { GetInfosTvShowService } from '../../features/informations/service/get-infos-tv-show.service';
+import { InterationDbService } from '../service/interationDb.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-seasons-shower',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './seasons-shower.component.html',
   styleUrl: './seasons-shower.component.scss',
 })
 export class SeasonsShowerComponent {
-  private router: Router = inject(Router);
-  private handleTvShowsSelected: HandleTvShowsSelected = inject(
-    HandleTvShowsSelected
-  );
   @Input() season!: string;
   @Input() episodes!: number;
   @Input() link!: string | null;
   @Input() index!: any;
+  private router: Router = inject(Router);
+  private handleTvShowsSelected: HandleTvShowsSelected = inject(
+    HandleTvShowsSelected
+  );
   public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
+  private interactionDb: InterationDbService = inject(InterationDbService);
+
+  public watched: boolean = false;
 
   sendToEpisodes(index: any) {
     this.handleTvShowsSelected.selectedSeason.set(
@@ -30,9 +35,12 @@ export class SeasonsShowerComponent {
   }
 
   watchedSeason(index: number, event: any): void {
+    this.watched = !this.watched;
+
     //@ts-ignore
-    const teste = this.infos.infosTvShow$().seasons[index];
-    console.log('dsadsa', teste);
+    const selectedSeason = this.infos.infosTvShow$().seasons[index];
+    this.interactionDb.save(selectedSeason.id.toString(), this.watched);
+    console.log('dsadsa', selectedSeason);
     event?.stopPropagation();
   }
   // stopPropagation(event: any) {
