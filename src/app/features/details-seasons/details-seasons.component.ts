@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { DetailSeasonsService } from './service/details-seasons.service';
 import { InterationDbService } from '../../shared/service/interationDb.service';
 import { Episode } from './interface/detailsSeason';
+import { IEpisodeComponent } from '../../shared/interfaces/interface-component/i-episode-component';
 
 @Component({
   selector: 'app-details-seasons',
@@ -24,7 +25,7 @@ export class DetailsSeasonsComponent {
     watched = !watched;
     this.interactionDb.saveEpisode(selectedEpisode.id.toString(), watched);
     this.episodesSeriesService.infosEpisodesSeries.update(
-      (episodes: Array<Episode>) => {
+      (episodes: Array<IEpisodeComponent>) => {
         episodes[index].watched = watched;
         return episodes;
       }

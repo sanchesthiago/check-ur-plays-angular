@@ -1,11 +1,11 @@
-export interface IHomeTvShow {
+export interface IHomeTvShowResponse {
   page: number;
-  results: TvShow[];
+  results: TvShowResponse[];
   total_pages: number;
   total_results: number;
 }
 
-export interface TvShow {
+export interface TvShowResponse {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];

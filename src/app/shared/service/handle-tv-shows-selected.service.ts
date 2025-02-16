@@ -1,14 +1,15 @@
 import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
-import { TvShow } from '../../features/home/interfaces/IHomeInterface';
-import { ISeasons } from '../../features/informations/interfaces/IInformations';
+import { ISeasonsResponse } from '../../features/informations/interfaces/i-informations-response';
+import { TvShowResponse } from '../../features/home/interfaces/i-home-response';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HandleTvShowsSelected {
-  public selectedTvShow: WritableSignal<Partial<TvShow>> = signal({});
-  public selectedTvShow$: Signal<Partial<TvShow>> = this.selectedTvShow;
+  public selectedTvShow: WritableSignal<Partial<TvShowResponse>> = signal({});
+  public selectedTvShow$: Signal<Partial<TvShowResponse>> = this.selectedTvShow;
 
-  public selectedSeason: WritableSignal<Partial<ISeasons>> = signal({});
-  public selectedSeason$: Signal<Partial<ISeasons>> = this.selectedSeason;
+  public selectedSeason: WritableSignal<Partial<ISeasonsResponse>> = signal({});
+  public selectedSeason$: Signal<Partial<ISeasonsResponse>> =
+    this.selectedSeason;
 }

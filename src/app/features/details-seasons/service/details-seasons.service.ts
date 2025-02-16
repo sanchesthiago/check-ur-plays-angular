@@ -9,6 +9,7 @@ import { Episode, Season } from '../interface/detailsSeason';
 import { Observable, tap } from 'rxjs';
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IEpisodeComponent } from '../../../shared/interfaces/interface-component/i-episode-component';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +20,10 @@ export class DetailSeasonsService {
   );
   private http: HttpClient = inject(HttpClient);
 
-  public infosEpisodesSeries: WritableSignal<Array<Episode>> = signal([]);
-  public infosEpisodesSeries$: Signal<Array<Episode>> =
+  public infosEpisodesSeries: WritableSignal<Array<IEpisodeComponent>> = signal(
+    []
+  );
+  public infosEpisodesSeries$: Signal<Array<IEpisodeComponent>> =
     this.infosEpisodesSeries;
 
   getDetailsSeasons(): Observable<Season> {

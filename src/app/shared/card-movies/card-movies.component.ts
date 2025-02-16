@@ -3,7 +3,7 @@ import { HandleTvShowsSelected } from '../service/handle-tv-shows-selected.servi
 import { Router } from '@angular/router';
 import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 import { CommonModule } from '@angular/common';
-import { TvShow } from '../../features/home/interfaces/IHomeInterface';
+import { TvShowResponse } from '../../features/home/interfaces/i-home-response';
 
 @Component({
   selector: 'app-card-movies',
@@ -18,7 +18,7 @@ export class CardMoviesComponent {
   );
   private router: Router = inject(Router);
   @ViewChild('nav', { read: DragScrollComponent }) ds!: DragScrollComponent;
-  @Input() public popularList!: Array<Partial<TvShow>>;
+  @Input() public popularList!: Array<Partial<TvShowResponse>>;
 
   public getClickCard($event: number): void {
     if (this.popularList && this.popularList.length > $event) {

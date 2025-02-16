@@ -1,10 +1,7 @@
-import { Signal } from '@angular/core';
-import { IDbSerieComponent } from '../../../shared/interfaces/IDbSerieComponent';
-
-export interface IInformationsTvShow {
+export interface IInformationsTvShowResponse {
   id: number; // ID da série
   adult: boolean; // Indica se o conteúdo é adulto
-  created_by: Array<created_by>; // Array com informações dos criadores
+  created_by: Array<createdByResponse>; // Array com informações dos criadores
   backdrop_path: string; // URL completa do backdrop
   name: string; // Nome da série
   genres: string[]; // Apenas os nomes dos gêneros
@@ -15,12 +12,10 @@ export interface IInformationsTvShow {
   number_of_episodes: number; // Número total de episódios
   number_of_seasons: number; // Número total de temporadas
   original_name: string; // Nome original da série
-  seasons: Array<ISeasons>;
-  serieInformationFromDb: any;
-  seasonInformationFromDb: any;
+  seasons: Array<ISeasonsResponse>;
 }
 
-export interface ISeasons {
+export interface ISeasonsResponse {
   air_date: string;
   episode_count: number;
   id: number;
@@ -29,10 +24,9 @@ export interface ISeasons {
   poster_path: string; // URL do poster ou `null` se não houver
   season_number: number;
   vote_average: number;
-  watched?: boolean;
 }
 
-export interface created_by {
+export interface createdByResponse {
   id: number;
   credit_id: string;
   name: string;

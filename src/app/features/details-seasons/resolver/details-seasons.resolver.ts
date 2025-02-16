@@ -5,12 +5,14 @@ import { DetailSeasonsService } from '../service/details-seasons.service';
 import { inject, Injectable } from '@angular/core';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
 import { InterationDbService } from '../../../shared/service/interationDb.service';
+import { IEpisodeComponent } from '../../../shared/interfaces/interface-component/i-episode-component';
+import { IEpisodeResponse } from '../../../shared/interfaces/interface-service-response/i-episode-response';
 
 @Injectable({
   providedIn: 'root', // Torna o resolver disponível como um serviço global
 })
 export class DetailsSeasonsResolver
-  implements Resolve<Array<Partial<Episode>>>
+  implements Resolve<Array<IEpisodeComponent>>
 {
   private episodesSeriesService: DetailSeasonsService =
     inject(DetailSeasonsService);
@@ -20,14 +22,14 @@ export class DetailsSeasonsResolver
   private interactionDbService: InterationDbService =
     inject(InterationDbService);
 
-  resolve(): Observable<Array<Partial<Episode>>> {
+  resolve(): Observable<Array<IEpisodeComponent>> {
     return forkJoin({
       detailsSeasons: this.episodesSeriesService.getDetailsSeasons(),
       episodesInfoFromDb: this.interactionDbService.epsodesInformationfromDb(),
     }).pipe(
       map(({ detailsSeasons, episodesInfoFromDb }) => {
-        const filterResults: Array<Partial<Episode>> =
-          detailsSeasons.episodes.map((episode: Episode) => {
+        const filterResults: Array<IEpisodeComponent> =
+          detailsSeasons.episodes.map((episode: IEpisodeResponse) => {
             const dbEpisode =
               episodesInfoFromDb?._data?.episodes?.episode?.properties?.find(
                 (prop: any) => prop.id === episode.id.toString()
@@ -44,7 +46,7 @@ export class DetailsSeasonsResolver
               watched: dbEpisode ? dbEpisode.watched : false,
             };
           });
-        //@ts-ignore
+
         this.episodesSeriesService.infosEpisodesSeries.set(filterResults);
         console.log('Page Detalhes Temporada Componente', filterResults); // Apenas para depuração
         return filterResults;

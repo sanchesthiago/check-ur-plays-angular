@@ -2,19 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import {
   inject,
   Injectable,
-  NgZone,
   signal,
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { from, Observable, of, tap } from 'rxjs';
-import { IInformationsTvShow } from '../interfaces/IInformations';
-import { teste } from '../../../shared/models/teste.mock';
+import { Observable, tap } from 'rxjs';
+
 import { HandleTvShowsSelected } from '../../../shared/service/handle-tv-shows-selected.service';
 import { MissingImgHandleService } from '../../../shared/service/missing-img-handle.service';
-import { IInformationsDB } from '../components/actions-movies/actions-movies.component';
-import { DbService } from '../../../shared/service/db.service';
-import { IDbSerieComponent } from '../../../shared/interfaces/IDbSerieComponent';
+
+import { IInformationsTvShowResponse } from '../interfaces/i-informations-response';
+import { IInformationsTvShowComponent } from '../interfaces/i-informations-component';
 
 @Injectable({
   providedIn: 'root',
@@ -28,17 +26,19 @@ export class GetInfosTvShowService {
   private handleTvShowsSelected: HandleTvShowsSelected = inject(
     HandleTvShowsSelected
   );
-  public infosTvShow: WritableSignal<Partial<IInformationsTvShow>> = signal({});
-  public infosTvShow$: Signal<Partial<IInformationsTvShow>> = this.infosTvShow;
+  public infosTvShow: WritableSignal<Partial<IInformationsTvShowComponent>> =
+    signal({});
+  public infosTvShow$: Signal<Partial<IInformationsTvShowComponent>> =
+    this.infosTvShow;
 
-  getInfos(): Observable<IInformationsTvShow> {
+  getInfos(): Observable<IInformationsTvShowResponse> {
     const selectedIdTvShow = this.handleTvShowsSelected.selectedTvShow$().id;
     return this.http
-      .get<IInformationsTvShow>(
+      .get<IInformationsTvShowResponse>(
         `http://localhost:9010/tvserie/byType/${selectedIdTvShow}`
       )
       .pipe(
-        tap((resp: IInformationsTvShow) => {
+        tap((resp: IInformationsTvShowResponse) => {
           console.log('Page Information Service', resp); // Apenas para depuração
           return resp;
         })

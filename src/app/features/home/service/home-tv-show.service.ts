@@ -7,10 +7,8 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { IHomeTvShow, TvShow } from '../interfaces/IHomeInterface';
-import { DbService } from '../../../shared/service/db.service';
-import { GetInfosTvShowService } from '../../informations/service/get-infos-tv-show.service';
-import { IInformationsDB } from '../../informations/components/actions-movies/actions-movies.component';
+import { IHomeTvShowResponse } from '../interfaces/i-home-response';
+import { TvShowComponent } from '../interfaces/i-tv-show-component';
 
 @Injectable({
   providedIn: 'root',
@@ -18,22 +16,16 @@ import { IInformationsDB } from '../../informations/components/actions-movies/ac
 export class HomeTvShowService {
   public http: HttpClient = inject(HttpClient);
 
-  public HomeTvShowPopularity: WritableSignal<Array<Partial<TvShow>>> = signal([
-    {
-      backdrop_path: '',
-      id: 0,
-      name: '',
-      overview: '',
-    },
-  ]);
-  public HomeTvShowPopularity$: Signal<Array<Partial<TvShow>>> =
+  public HomeTvShowPopularity: WritableSignal<Array<Partial<TvShowComponent>>> =
+    signal([{}]);
+  public HomeTvShowPopularity$: Signal<Array<Partial<TvShowComponent>>> =
     this.HomeTvShowPopularity;
 
-  getPopularyTvShow(): Observable<IHomeTvShow> {
+  getPopularyTvShow(): Observable<IHomeTvShowResponse> {
     return this.http
-      .get<IHomeTvShow>('http://localhost:9010/tvserie/popular')
+      .get<IHomeTvShowResponse>('http://localhost:9010/tvserie/popular')
       .pipe(
-        tap((resp: IHomeTvShow) => {
+        tap((resp: IHomeTvShowResponse) => {
           console.log('Page Home Service', resp); // Apenas para depuração
           return resp;
         })
