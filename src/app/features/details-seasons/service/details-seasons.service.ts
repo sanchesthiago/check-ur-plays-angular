@@ -19,10 +19,8 @@ export class DetailSeasonsService {
   );
   private http: HttpClient = inject(HttpClient);
 
-  public infosEpisodesSeries: WritableSignal<Array<Partial<Episode>>> = signal(
-    []
-  );
-  public infosEpisodesSeries$: Signal<Array<Partial<Episode>>> =
+  public infosEpisodesSeries: WritableSignal<Array<Episode>> = signal([]);
+  public infosEpisodesSeries$: Signal<Array<Episode>> =
     this.infosEpisodesSeries;
 
   getDetailsSeasons(): Observable<Season> {

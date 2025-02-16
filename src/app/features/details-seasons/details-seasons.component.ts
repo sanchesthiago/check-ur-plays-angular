@@ -1,10 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { episodesSeason } from '../../../assets/episodes-season';
+import { Component, inject } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { Season } from './interface/detailsSeason';
-import { HandleTvShowsSelected } from '../../shared/service/handle-tv-shows-selected.service';
 import { DetailSeasonsService } from './service/details-seasons.service';
+import { InterationDbService } from '../../shared/service/interationDb.service';
+import { Episode } from './interface/detailsSeason';
 
 @Component({
   selector: 'app-details-seasons',
@@ -16,4 +15,22 @@ import { DetailSeasonsService } from './service/details-seasons.service';
 export class DetailsSeasonsComponent {
   public episodesSeriesService: DetailSeasonsService =
     inject(DetailSeasonsService);
+  private interactionDb: InterationDbService = inject(InterationDbService);
+
+  watchedEpisode(index: number): void {
+    const selectedEpisode =
+      this.episodesSeriesService.infosEpisodesSeries$()[index];
+    let watched = selectedEpisode.watched;
+    watched = !watched;
+    this.interactionDb.saveEpisode(selectedEpisode.id.toString(), watched);
+    this.episodesSeriesService.infosEpisodesSeries.update(
+      (episodes: Array<Episode>) => {
+        episodes[index].watched = watched;
+        return episodes;
+      }
+    );
+
+    console.log('Episódio assistido', selectedEpisode);
+    console.log('Episódio', watched);
+  }
 }

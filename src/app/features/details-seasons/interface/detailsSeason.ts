@@ -26,6 +26,7 @@ export interface Episode {
   vote_count: number;
   crew: CrewMember[];
   guest_stars: GuestStar[];
+  watched?: boolean;
 }
 
 export interface CrewMember {

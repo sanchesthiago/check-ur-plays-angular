@@ -52,6 +52,19 @@ export class InterationDbService {
       });
   }
 
+  public async epsodesInformationfromDb(): Promise<any> {
+    return await this.dbSvc.db.episodeDataBase
+      .findOne({
+        selector: {
+          id: this.handleTvShowsSelected.selectedTvShow$().id?.toString(),
+        },
+      })
+      .exec()
+      .then((res: any) => {
+        return res;
+      });
+  }
+
   public async getInformationfromDb2(): Promise<any> {
     return await this.dbSvc.db.seriesDataBase
       .findOne({
@@ -110,6 +123,69 @@ export class InterationDbService {
           id: selectedIdTvShow,
           seasons: {
             season: {
+              properties: [
+                {
+                  id: id,
+                  watched: watched,
+                },
+              ],
+            },
+          },
+        });
+      }
+    } catch (error) {
+      alert('Deu Ruim');
+      console.error(error);
+      throw error;
+    }
+  }
+
+  // Novo método para salvar informações do componente episodes
+  public async saveEpisode(id: string, watched: boolean) {
+    try {
+      const selectedIdTvShow = this.handleTvShowsSelected
+        .selectedTvShow$()
+        .id?.toString();
+      const existingDoc = await this.dbSvc.db.episodeDataBase
+        .findOne({
+          selector: {
+            id: selectedIdTvShow,
+          },
+        })
+        .exec();
+
+      if (existingDoc) {
+        const episodes = existingDoc._data.episodes || {
+          episode: { properties: [] },
+        };
+        const properties = episodes.episode.properties;
+        const propertyIndex = properties.findIndex(
+          (prop: any) => prop.id === id
+        );
+
+        if (propertyIndex !== -1) {
+          // Atualiza a propriedade watched se o id já existir
+          properties[propertyIndex].watched = watched;
+        } else {
+          // Adiciona um novo objeto ao array properties se o id não existir
+          properties.push({ id: id, watched: watched });
+        }
+
+        // Atualiza o documento no banco de dados
+        await this.dbSvc.db.episodeDataBase.upsert({
+          id: selectedIdTvShow,
+          episodes: {
+            episode: {
+              properties: properties,
+            },
+          },
+        });
+      } else {
+        // Cria um novo documento se não existir
+        await this.dbSvc.db.episodeDataBase.upsert({
+          id: selectedIdTvShow,
+          episodes: {
+            episode: {
               properties: [
                 {
                   id: id,

@@ -1,15 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { ISeasons } from '../interfaces/IInformations';
 import { InterationDbService } from '../../../shared/service/interationDb.service';
-import { map } from 'rxjs';
-import { DbService } from '../../../shared/service/db.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GenerateInfosForSeasonsService {
   private infosSeasonsFromDb: InterationDbService = inject(InterationDbService);
-  public dbSvc: DbService = inject(DbService);
 
   public async infosSeasons(
     seasons: Array<ISeasons>

@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="bg-gradient bg-black p-2 text-white">
-  @for (item of episodesSeriesService.infosEpisodesSeries$(); track $index) {
+  @for (item of episodesSeriesService.infosEpisodesSeries$() ; track $index) {
 
   <div class="container mt-4 bg-gradient bg-black">
     <div class="row">
@@ -12,12 +12,15 @@
       <div class="col-10">
         <p class="h4 pt-2">{{ item.name }}</p>
       </div>
-      <div class="col-2 align-icon">
-        <!-- <i
-          class="bi bi-check2-circle"
-          style="font-size: 1.5rem"
-          [ngStyle]="{ color: item.watched ? 'green' : 'white' }"
-        ></i> -->
+      <div
+        class="col-2 align-icon z-3"
+        [ngStyle]="{
+          color: item.watched ? 'green' : 'white'
+        }"
+        (click)="watchedEpisode($index)"
+      >
+        {{ item.watched }}
+        <i class="bi bi-check2-circle" style="font-size: 1.5rem"></i>
       </div>
     </div>
     <div class="row">
