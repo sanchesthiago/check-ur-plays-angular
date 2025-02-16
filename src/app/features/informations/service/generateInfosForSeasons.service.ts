@@ -26,7 +26,6 @@ export class GenerateInfosForSeasonsService {
         return season;
       })
     );
-    console.log('Updated seasons', updatedSeasons);
     return updatedSeasons;
   }
 }

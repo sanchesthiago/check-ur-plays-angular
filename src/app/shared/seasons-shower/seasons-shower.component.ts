@@ -17,14 +17,13 @@ export class SeasonsShowerComponent {
   @Input() episodes!: number;
   @Input() link!: string | null;
   @Input() index!: any;
+  @Input() watched!: boolean | undefined;
   private router: Router = inject(Router);
   private handleTvShowsSelected: HandleTvShowsSelected = inject(
     HandleTvShowsSelected
   );
   public infos: GetInfosTvShowService = inject(GetInfosTvShowService);
   private interactionDb: InterationDbService = inject(InterationDbService);
-
-  public watched: boolean = false;
 
   sendToEpisodes(index: any) {
     this.handleTvShowsSelected.selectedSeason.set(
@@ -40,10 +39,6 @@ export class SeasonsShowerComponent {
     //@ts-ignore
     const selectedSeason = this.infos.infosTvShow$().seasons[index];
     this.interactionDb.save(selectedSeason.id.toString(), this.watched);
-    console.log('dsadsa', selectedSeason);
     event?.stopPropagation();
   }
-  // stopPropagation(event: any) {
-  //   event?.stopPropagation();
-  // }
 }

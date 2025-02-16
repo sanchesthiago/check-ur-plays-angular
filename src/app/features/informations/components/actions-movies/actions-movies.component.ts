@@ -29,7 +29,6 @@ export class ActionsMoviesComponent implements OnInit {
       if (infosTvShow && infosTvShow._data) {
         this.isSelected.fullWatched = infosTvShow._data.series.fullWatched;
         this.isSelected.favorit = infosTvShow._data.series.isFavorit;
-        console.log('this.infos', this.isSelected);
       }
     } catch (error) {
       console.error('Error fetching information from DB:', error);
@@ -45,7 +44,6 @@ export class ActionsMoviesComponent implements OnInit {
     }
     try {
       await this.interactionDb.saveInformationsForDb(this.isSelected);
-      console.log('this.isSelected', this.isSelected);
     } catch (error) {
       console.error('Error saving information:', error);
     }

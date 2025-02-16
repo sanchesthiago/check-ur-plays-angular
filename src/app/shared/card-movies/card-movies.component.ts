@@ -22,9 +22,7 @@ export class CardMoviesComponent {
 
   public getClickCard($event: number): void {
     if (this.popularList && this.popularList.length > $event) {
-      const selectedObject = this.popularList[$event]; // Obtém o objeto do array
       this.handleTvShowsSelected.selectedTvShow.set(this.popularList[$event]);
-      console.log('Objeto selecionado:', selectedObject);
     } else {
       console.warn('Índice fora do alcance do array ou array indefinido.');
     }
@@ -32,6 +30,7 @@ export class CardMoviesComponent {
   }
 
   moveLeft() {
+    5;
     this.ds.moveLeft();
   }
 
@@ -42,13 +41,4 @@ export class CardMoviesComponent {
   moveTo(index: any) {
     this.ds.moveTo(index);
   }
-
-  // getIndex($event: number) {
-  //   if (this.popularList && this.popularList.length > $event) {
-  //     const selectedObject = this.popularList[$event]; // Obtém o objeto do array
-  //     console.log('Objeto selecionado:', selectedObject);
-  //   } else {
-  //     console.warn('Índice fora do alcance do array ou array indefinido.');
-  //   }
-  // }
 }
