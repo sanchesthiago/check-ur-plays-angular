@@ -21,6 +21,7 @@ export class GenerateInfosForSeasonsService {
             (prop: any) => prop.id === season.id.toString() && prop.watched
           );
         }
+        // season.poster_path = `https://image.tmdb.org/t/p/w200${season.poster_path}`;
         return season;
       })
     );
